@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="card_back">#5CF3F0F0</color>
     <color name="dark">#5C373030</color>
+    <color name="back">#41E4203C</color>
 </resources>

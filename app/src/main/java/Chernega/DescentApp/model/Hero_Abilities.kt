@@ -1,4 +1,4 @@
-package Chernega.DescentApp.data
+package Chernega.DescentApp.model
 
 data class Hero_Abilities(
     val name: String, val Abilities: String

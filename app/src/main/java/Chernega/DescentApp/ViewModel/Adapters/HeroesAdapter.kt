@@ -1,25 +1,26 @@
-package Chernega.DescentApp
+package Chernega.DescentApp.ViewModel.Adapters
 
-import Chernega.DescentApp.data.HeroesModel
-import Chernega.DescentApp.data.getHeroesModels
+import Chernega.DescentApp.R
+import Chernega.DescentApp.model.HeroesModel
+import Chernega.DescentApp.model.getHeroesModels
 import Chernega.DescentApp.databinding.ListViewBinding
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
 
 class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.Holder>() {
 
-    val heroesList = ArrayList<HeroesModel>(getHeroesModels())
+    private val heroesList = ArrayList<HeroesModel>(getHeroesModels())
 
     class Holder(item: View): RecyclerView.ViewHolder(item) {
         private val binding = ListViewBinding.bind(item)
+
         fun bind(hero: HeroesModel) = with(binding) {
-            iViewFace.setImageResource(hero.logo)
-            tViewName.text = hero.name
-            tViewType.text = hero.type
+//            iViewFace.setImageResource(hero.logo)
+            tViewName.text = "name: " + hero.name
+            tViewType.text = "type: " + hero.type
             tViewSpeed.text = "speed: " + hero.speed.toString()
             tViewHealth.text = "Health: " +hero.health.toString()
             tViewStamina.text = "Stamina: " +hero.stamina.toString()
@@ -28,7 +29,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.Holder>() {
             tViewWillpower.text = "Willpower: " +hero.willpower.toString()
             tViewKnowledge.text = "Knowledge: " +hero.knowledge.toString()
             tViewAwareness.text = "Awareness: " +hero.knowledge.toString()
-            tViewExpansion.text = hero.expansion
+            tViewExpansion.text = "expansion: " + hero.expansion
             tViewBr.text = "Rating: " +hero.br.toString()
         }
     }
@@ -45,6 +46,7 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.Holder>() {
     override fun getItemCount(): Int {
         return heroesList.size
     }
-
 }
+
+
 
