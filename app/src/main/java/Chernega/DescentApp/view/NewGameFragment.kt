@@ -19,8 +19,11 @@ class NewGameFragment : Fragment() {
     private val binding get() = _binding
     private val dataModel: DataModel by activityViewModels()
     private val adapter = PlayersAdapter()
-
-
+    private val list = ArrayList<HeroesModel>(getHeroesModels())
+    private val countPlayers: Int = 6
+    private var scoreHeroes: Double = 0.0
+    private var player = "player_"
+    var playersList : MutableList<PlayersModel> = mutableListOf()
 
 
     override fun onCreateView(
@@ -54,24 +57,42 @@ class NewGameFragment : Fragment() {
         _binding = null
     }
 
+
+
     private fun mainJob() {
-        val countPlayers: Int = 6
-            /* 1.СОЗДАНИЕ ГРАНИЦ ПО БОЕВОМУ РЕЙТИНГУ */
+
+        createMaxAndMinBr(list)   /** 1СОЗДАНИЕ ГРАНИЦ ПО БОЕВОМУ РЕЙТИНГУ */
+
+        createRandomHeroes()        /** 2.СОЗДАНИЕ РАНДОМНЫХ ГЕРОЕВ */
+
+        createPlayersList_with_Names() /** 3 ИМЕНА ИГРОКОВ  */
+
+        createFinalList(createPlayersList_with_Names()) /** 4 ПРИСВОЕНИЯ ИМЕНИ И РЕЙТИНГА ГЕРОЕВ В ОБЩИЙ ЛИСТ*/
+
+    }
+
+
+
+
+
+    private fun createMaxAndMinBr(list: List<HeroesModel>) {
+        /* 1.СОЗДАНИЕ ГРАНИЦ ПО БОЕВОМУ РЕЙТИНГУ */
         var maxBr = 0
         var minBr = 0
         var sumBr = 0
-        for (i in getHeroesModels().size - 1 downTo getHeroesModels().size - countPlayers) {
+        for (i in list.size - 1 downTo list.size - countPlayers) {
             maxBr += getHeroesModels()[i].br.toInt()
         }
         for (i in 0 until  countPlayers) {
-            minBr += getHeroesModels()[i].br.toInt()
+            minBr += list[i].br.toInt()
         }
-        for (hero in getHeroesModels()) {
+        for (hero in list) {
             sumBr += hero.br.toInt()
         }
-        val scoreHeroes = ((Math.random() * (maxBr - minBr) + 1) + minBr);
+        scoreHeroes = ((Math.random() * (maxBr - minBr) + 1) + minBr)
+    }
 
-
+    private fun createRandomHeroes(): HashSet<HeroesModel> {
 
         /*! 2.СОЗДАНИЕ РАНДОМНЫХ ГЕРОЕВ */
         val randomHeroes: HashSet<HeroesModel> = HashSet() // <- сюда будем копировать
@@ -80,16 +101,21 @@ class NewGameFragment : Fragment() {
 
         do {
             for (i in 0 until countPlayers) {
-                val randomNumber = rnd.nextInt(getHeroesModels().size)
-                val randomHero: HeroesModel = getHeroesModels()[randomNumber]
+                val randomNumber = rnd.nextInt(list.size)
+                val randomHero: HeroesModel = list[randomNumber]
                 randomHeroes.add(randomHero)
                 checkBr += randomHero.br.toInt()
             }
         } while (randomHeroes.size != countPlayers && (scoreHeroes - checkBr > 2 || checkBr - scoreHeroes > 2))
 
+        return randomHeroes;
+
+    }
+
+    private fun createPlayersList_with_Names(): MutableList<PlayersModel> {
+
         /*! 3. ИМЕНА ИГРОКОВ */
-        val playersList : MutableList<PlayersModel> = getPlayersModels()
-        var player = "player_"
+
 
         for (i in 0 until countPlayers) {
             player += (i + 1)
@@ -98,8 +124,13 @@ class NewGameFragment : Fragment() {
             sb.delete(7, sb.length)
             player = sb.toString()
         }
+        return playersList
+    }
+
+    private fun createFinalList(playersList: MutableList<PlayersModel>): MutableList<PlayersModel> {
 
         /* 3.1. ПРИСВОЕНИЯ ИМЕНИ И РЕЙТИНГА ГЕРОЕВ В ОБЩИЙ ЛИСТ */
+        val randomHeroes = createRandomHeroes()
         val randomHeroesLIST: List<HeroesModel> = ArrayList(randomHeroes)
 
         try {
@@ -121,6 +152,7 @@ class NewGameFragment : Fragment() {
         } catch (e: IndexOutOfBoundsException) {
             e.printStackTrace()
         }
+        return playersList
     }
 
 
