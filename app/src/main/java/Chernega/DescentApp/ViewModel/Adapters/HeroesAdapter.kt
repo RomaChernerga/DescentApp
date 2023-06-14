@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 
 
 class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.Holder>() {
@@ -18,7 +20,9 @@ class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.Holder>() {
         private val binding = ListViewBinding.bind(item)
 
         fun bind(hero: HeroesModel) = with(binding) {
-//            iViewFace.setImageResource(hero.logo)
+            iViewLogo.load(hero.logo){
+                transformations(CircleCropTransformation())
+            }
             tViewName.text = "name: " + hero.name
             tViewType.text = "type: " + hero.type
             tViewSpeed.text = "speed: " + hero.speed.toString()
