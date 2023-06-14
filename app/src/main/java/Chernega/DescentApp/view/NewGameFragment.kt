@@ -3,7 +3,12 @@ package Chernega.DescentApp.view
 import Chernega.DescentApp.ViewModel.Adapters.PlayersAdapter
 import Chernega.DescentApp.model.*
 import Chernega.DescentApp.databinding.FragmentNewGameBinding
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Parcelable
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 class NewGameFragment : Fragment() {
     private var _binding: FragmentNewGameBinding? = null
     private val binding get() = _binding
@@ -23,7 +29,11 @@ class NewGameFragment : Fragment() {
     private val countPlayers: Int = 6
     private var scoreHeroes: Double = 0.0
     private var player = "player_"
-    var playersList : MutableList<PlayersModel> = mutableListOf()
+
+   var playersList : MutableList<PlayersModel> = ArrayList()
+
+
+
 
 
     override fun onCreateView(
@@ -68,6 +78,8 @@ class NewGameFragment : Fragment() {
         createPlayersList_with_Names() /** 3 ИМЕНА ИГРОКОВ  */
 
         createFinalList(createPlayersList_with_Names()) /** 4 ПРИСВОЕНИЯ ИМЕНИ И РЕЙТИНГА ГЕРОЕВ В ОБЩИЙ ЛИСТ*/
+
+
 
     }
 
@@ -152,8 +164,16 @@ class NewGameFragment : Fragment() {
         } catch (e: IndexOutOfBoundsException) {
             e.printStackTrace()
         }
+
+
         return playersList
+
+
+
     }
 
 
+
+
 }
+

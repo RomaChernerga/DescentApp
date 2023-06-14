@@ -1,6 +1,9 @@
 package Chernega.DescentApp.model
 
-data class PlayersModel(
+import android.os.Parcelable
+import java.io.Serializable
+
+data class PlayersModel (
     var playerName: String,
     var logo: Int,
     var name: String,

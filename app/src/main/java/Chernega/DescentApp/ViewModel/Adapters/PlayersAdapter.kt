@@ -1,29 +1,18 @@
 package Chernega.DescentApp.ViewModel.Adapters
 
 import Chernega.DescentApp.R
-import Chernega.DescentApp.model.PlayersModel
-
 import Chernega.DescentApp.databinding.PlayersListViewBinding
-
-import Chernega.DescentApp.view.NewGameFragment
-import android.content.Context
+import Chernega.DescentApp.model.PlayersModel
+import Chernega.DescentApp.model.getPlayersModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.util.ArrayList
-import kotlin.reflect.KMutableProperty1
+
 
 class PlayersAdapter : RecyclerView.Adapter<PlayersAdapter.Holder>() {
 
-//        private val playersList = ArrayList<PlayersModel>()
-//    private val newGameFragment: NewGameFragment = NewGameFragment()
-
-    val list: KMutableProperty1<NewGameFragment, MutableList<PlayersModel>> = NewGameFragment::playersList
-
-    val finalPlayersList: ArrayList<PlayersModel> = ArrayList(list)
-
-
+    private val finalPlayersList = getPlayersModels()
 
 
     class Holder(item: View) : RecyclerView.ViewHolder(item) {
