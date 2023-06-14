@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import Chernega.DescentApp.R
 import Chernega.DescentApp.model.DataModel
+import Chernega.DescentApp.model.players
+
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
@@ -14,11 +16,16 @@ import androidx.fragment.app.activityViewModels
 
 class nGameDialogFragment : DialogFragment() {
 
+
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
+
         val customView: View = layoutInflater.inflate(R.layout.fragment_n_game_dialog, null)
         val editText: EditText = customView.findViewById(R.id.editText)
+
         val myContex = requireActivity()
         val dataModel: DataModel by activityViewModels()
 
@@ -30,6 +37,7 @@ class nGameDialogFragment : DialogFragment() {
 
             .setPositiveButton("Enter") {_, _ ->
                 dataModel.players.value = editText.text.toString()
+
                 goToNGame()
             }
             .setNegativeButton("No") { _, _ ->
@@ -39,9 +47,11 @@ class nGameDialogFragment : DialogFragment() {
     }
 
     private fun goToNGame() {
+
         activity?.supportFragmentManager
             ?.beginTransaction()
             ?.replace(R.id.placeholder, NewGameFragment::class.java.newInstance())
+            .apply { players() }
             ?.addToBackStack(null)
             ?.commit()
     }
