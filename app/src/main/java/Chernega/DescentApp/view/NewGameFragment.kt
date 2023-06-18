@@ -19,6 +19,16 @@ class NewGameFragment : Fragment() {
     private val dataModel: DataModel by activityViewModels()
     private val adapter = PlayersAdapter()
 
+    companion object {
+        fun newInstance(bundle : Bundle): NewGameFragment {
+            val newGameFragment = NewGameFragment()
+            newGameFragment.arguments = bundle
+            return newGameFragment
+        }
+    }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +44,11 @@ class NewGameFragment : Fragment() {
         dataModel.players.observe(activity as LifecycleOwner) {
             binding?.tViewPlayers?.text = it
         }
+        val maxBr = arguments?.getInt("final")
+        binding?.tViewBr?.text = maxBr.toString()
+
+
+
         initRecyclerView()
 
     }

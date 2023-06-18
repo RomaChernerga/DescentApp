@@ -21,7 +21,7 @@ class PlayersAdapter : RecyclerView.Adapter<PlayersAdapter.Holder>() {
         private val binding = PlayersListViewBinding.bind(item)
         fun bind(player: PlayersModel) = with(binding) {
             iViewLogo.load(player.logo) {
-//                transformations(CircleCropTransformation())
+                transformations(CircleCropTransformation())
             }
             tViewPlayer.text = player.playerName
             tViewName.text = "name: " + player.name

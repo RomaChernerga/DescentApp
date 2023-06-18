@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.View
 import Chernega.DescentApp.R
 import Chernega.DescentApp.model.DataModel
+import Chernega.DescentApp.model.maxBr
+
 import Chernega.DescentApp.model.players
+
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -14,7 +17,9 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 
-class nGameDialogFragment : DialogFragment() {
+var playersCount: Int = 0
+
+class NewGameDialogFragment : DialogFragment() {
 
 
 
@@ -36,7 +41,10 @@ class nGameDialogFragment : DialogFragment() {
             .setIcon(R.drawable.alert)
 
             .setPositiveButton("Enter") {_, _ ->
+                playersCount = Integer.parseInt(editText.text.toString())
                 dataModel.players.value = editText.text.toString()
+
+
 
                 goToNGame()
             }
@@ -47,13 +55,19 @@ class nGameDialogFragment : DialogFragment() {
     }
 
     private fun goToNGame() {
+        val bundle = Bundle()
+        bundle.putInt("final", maxBr)
 
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.placeholder, NewGameFragment::class.java.newInstance())
-            .apply { players() }
-            ?.addToBackStack(null)
-            ?.commit()
+
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.placeholder, NewGameFragment::class.java, bundle)
+            .apply {
+                players()
+                bundle.putInt("final", maxBr)
+            }
+            .addToBackStack(null)
+            .commit()
     }
 
 }

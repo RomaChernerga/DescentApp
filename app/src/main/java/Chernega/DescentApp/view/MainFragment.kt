@@ -5,38 +5,40 @@ import Chernega.DescentApp.databinding.FragmentMainBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.Fragment
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 
 
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.btnViewHeroes?.setOnClickListener {
+        binding.btnViewHeroes.setOnClickListener {
             lookAllHeroes() }
 
 
-        binding?.btnNewGame?.setOnClickListener {
-            startNewGame()
+        binding.btnNewGame.setOnClickListener { startNewGame() }
+
+        binding.btnLoadGame.setOnClickListener {
+
         }
     }
     private fun startNewGame() {
-        val dialogFragment = nGameDialogFragment()
+        val dialogFragment = NewGameDialogFragment()
         fragmentManager?.let { dialogFragment.show(it, "") }
     }
 
@@ -46,6 +48,8 @@ class MainFragment : Fragment() {
             ?.replace(R.id.placeholder, HeroesFragment())
             ?.addToBackStack(null)?.commit()
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

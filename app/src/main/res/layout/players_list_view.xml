@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,6 +41,16 @@
                 app:layout_constraintBottom_toTopOf="@id/linearLayout">
 
                 <TextView
+                    android:id="@+id/tView_player"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/text_size_main"
+                    android:textColor="@color/black"
+                    tools:text="Player" />
+
+                <TextView
                     android:id="@+id/tView_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,16 +82,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tView_player"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_Player"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toStartOf="@+id/iView_logo"
-                app:layout_constraintStart_toEndOf="@+id/linear_info"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Player" />
+
 
             <ImageView
                 android:id="@+id/iView_logo"
@@ -88,7 +90,6 @@
                 android:layout_height="80dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
