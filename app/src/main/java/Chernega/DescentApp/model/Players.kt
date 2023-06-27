@@ -20,28 +20,15 @@ var checkBr = 0
 private var player = "player_"
 var maxBr = 0
 
-
-
-val bundle = Bundle()
 var playersList: MutableList<PlayersModel> = mutableListOf()
 
 fun mainJob() {
 
-    createMaxAndMinBr(list)
-    /** 1СОЗДАНИЕ ГРАНИЦ ПО БОЕВОМУ РЕЙТИНГУ */
+    createMaxAndMinBr(list) /** 1 СОЗДАНИЕ ГРАНИЦ ПО БОЕВОМУ РЕЙТИНГУ */
 
+    createRandomHeroes() /** 2.СОЗДАНИЕ РАНДОМНЫХ ГЕРОЕВ */
 
-
-    createRandomHeroes()
-    /** 2.СОЗДАНИЕ РАНДОМНЫХ ГЕРОЕВ */
-
-//    createPlayersList_with_Names()
-//    /** 3 ИМЕНА ИГРОКОВ  */
-
-    createFinalList(playersList)
-    /** 4 ПРИСВОЕНИЯ ИМЕНИ И РЕЙТИНГА ГЕРОЕВ В ОБЩИЙ ЛИСТ*/
-
-
+    createFinalList(playersList) /** 3 ПРИСВОЕНИЯ ИМЕНИ И РЕЙТИНГА ГЕРОЕВ В ОБЩИЙ ЛИСТ*/
 }
 
 fun createMaxAndMinBr(list: List<HeroesModel>): Int {
@@ -67,8 +54,6 @@ fun createMaxAndMinBr(list: List<HeroesModel>): Int {
     return maxBr
 }
 
-
-
 private fun createRandomHeroes(): HashSet<HeroesModel> {
 
     /*! 2.СОЗДАНИЕ РАНДОМНЫХ ГЕРОЕВ */
@@ -87,7 +72,6 @@ private fun createRandomHeroes(): HashSet<HeroesModel> {
     return randomHeroes
 
 }
-
 
 private fun createFinalList(playersList: MutableList<PlayersModel>): MutableList<PlayersModel> {
     /*! 3. ИМЕНА ИГРОКОВ */
@@ -132,7 +116,6 @@ private fun createFinalList(playersList: MutableList<PlayersModel>): MutableList
 
 
 }
-
 
 fun getPlayersModels(): MutableList<PlayersModel> {
 

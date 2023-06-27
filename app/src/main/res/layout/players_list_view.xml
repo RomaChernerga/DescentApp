@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
+        android:id="@+id/card_view_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
